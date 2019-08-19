@@ -30,7 +30,7 @@ def main(args):
     label_name = 'label'
     train, test = load_train_test(f=args.infile, label_name=label_name)
 
-    train=train.head(1000).copy()
+    #train=train.head(1000).copy()
 
     print('loaded', train.shape[0], test.shape[0])
     print('label rate', train[label_name].mean(), test[label_name].mean())
@@ -122,8 +122,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n','--n-iter', help='number of random search iterations', required=False, default=3)
-    parser.add_argument('-k','--k-cv', help='K folds for cross validation', required=False, default=5)
+    parser.add_argument('-n','--n-iter', help='number of random search iterations', required=False, default=3, type=int)
+    parser.add_argument('-k','--k-cv', help='K folds for cross validation', required=False, default=5, type=int)
     parser.add_argument('-f', '--infile', help='Path to input file', required=True)
     parser.add_argument('-m','--model-type', help='Model to fit {"rf", "gb"}', required=False, default='rf')
     args = parser.parse_args()
