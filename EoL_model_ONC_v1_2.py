@@ -36,7 +36,7 @@ def main(args):
     print('label rate', train[label_name].mean(), test[label_name].mean())
 
     # Read in feature set to use
-    with open('../models/in_vars.p', 'rb') as f:
+    with open('models/in_vars.p', 'rb') as f:
         in_vars = pickle.load(f)
     print('Using', len(in_vars), 'vars')
 
