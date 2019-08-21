@@ -35,13 +35,9 @@ def main(args):
     print('loaded', train.shape[0], test.shape[0])
     print('label rate', train[label_name].mean(), test[label_name].mean())
 
-    num_cols = [c for c in train if ': ' in c]
-    dx_cols = [c for c in train if c.startswith('n_')]
-    cat_cols = [c for c in train if '>>>' in c]
-
-    feature_cols = dx_cols + num_cols + cat_cols + ['PAT_AGE', 'SEX_C']
-
-    in_vars = feature_cols
+    # Read in feature set to use
+    with open('../models/in_vars.p', 'rb') as f:
+        in_vars = pickle.load(f)
     print('Using', len(in_vars), 'vars')
 
     if args.model_type == 'rf':
@@ -92,11 +88,12 @@ def main(args):
 
 
         max_features = ['auto', 'sqrt']
-        max_depth = [int(x) for x in np.linspace(10, 110, num = 10)]
+        learning_rate =  np.linspace(0.01, 0.2, num = 10)
+        max_depth = [int(x) for x in np.linspace(5, 100, num = 20)]
         max_depth.append(None)
         min_samples_leaf = [1, 2, 4]
         min_samples_split = [2, 5, 10]
-        n_estimators = [int(x) for x in np.linspace(start = 50, stop = 1000, num = 10)]
+        n_estimators = [int(x) for x in np.linspace(start = 10, stop = 1000, num = 10)]
         subsample = [0.5, 0.8, 1.0]
         loss = ['deviance', 'exponential']
 
@@ -107,6 +104,7 @@ def main(args):
                        'min_samples_split': min_samples_split,
                        'n_estimators': n_estimators,
                        'subsample': subsample,
+                       'learning_rate': learning_rate,
                        'loss': loss}
         pprint(random_grid)
         gb_random = RandomizedSearchCV(estimator = gb, param_distributions = random_grid, scoring='roc_auc',
