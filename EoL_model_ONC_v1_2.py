@@ -41,6 +41,7 @@ def main(args):
     print('Using', len(in_vars), 'vars')
 
     if args.model_type == 'rf':
+        print('Fiting a RandomForestClassifier')
         rf = RandomForestClassifier(oob_score=True, bootstrap=True, random_state=42)
 
         # Look at parameters used by our current forest
@@ -81,6 +82,7 @@ def main(args):
             pickle.dump(args, f, pickle.HIGHEST_PROTOCOL)
 
     if args.model_type == 'gb':
+        print('Fiting a GradientBoostingClassifier')
         gb = GradientBoostingClassifier(verbose=1, subsample=0.9, random_state=42, n_iter_no_change=5)
 
         print('Parameters currently in use:\n')
@@ -123,6 +125,6 @@ if __name__ == '__main__':
     parser.add_argument('-n','--n-iter', help='number of random search iterations', required=False, default=3, type=int)
     parser.add_argument('-k','--k-cv', help='K folds for cross validation', required=False, default=5, type=int)
     parser.add_argument('-f', '--infile', help='Path to input file', required=True)
-    parser.add_argument('-m','--model-type', help='Model to fit {"rf", "gb"}', required=False, default='rf')
+    parser.add_argument('-m','--model-type', help='Model to fit {"rf", "gb"}', required=False)
     args = parser.parse_args()
     main(args)
