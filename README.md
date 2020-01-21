@@ -5,6 +5,20 @@ Code associated with the manuscript by Ravi B. Parikh, MD, MPP, Christopher Manz
 
 Copyright (c) 2019 University of Pennsylvania Health System, MIT License
 
+### Citation
+
+```
+@article{parikh2019machine,
+  title={Machine Learning Approaches to Predict 6-Month Mortality Among Patients With Cancer},
+  author={Parikh, Ravi B and Manz, Christopher and Chivers, Corey and Regli, Susan Harkness and Braun, Jennifer and Draugelis, Michael E and Schuchter, Lynn M and Shulman, Lawrence N and Navathe, Amol S and Patel, Mitesh S and others},
+  journal={JAMA network open},
+  volume={2},
+  number={10},
+  pages={e1915997--e1915997},
+  year={2019},
+  publisher={American Medical Association}
+}
+```
 
 ### Build & Run
 
